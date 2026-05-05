@@ -196,7 +196,20 @@
     .stat-lbl { font-size:.75rem; color:var(--txt3); text-transform:uppercase; letter-spacing:.1em; margin-top:.2rem; }
 
     /* ─── MISSION ────────────────────────────────────────────── */
-    .mission-inner { max-width:820px; margin:0 auto; text-align:center; }
+    .mission-inner {
+      max-width:900px; margin:0 auto;
+      display:flex; align-items:center; gap:3rem;
+    }
+    .mission-logo {
+      width:220px; height:220px; flex-shrink:0;
+      object-fit:contain; border-radius:16px;
+    }
+    .mission-text { text-align:left; }
+    @media (max-width:640px) {
+      .mission-inner { flex-direction:column; text-align:center; }
+      .mission-text { text-align:center; }
+      .mission-logo { width:100px; height:100px; }
+    }
     .mission-quote {
       font-size:clamp(1.3rem,3.5vw,2rem); font-weight:800;
       color:var(--blue); font-style:italic;
@@ -451,6 +464,72 @@
     .footer-links button:hover { color:var(--blue); }
     footer small { color:var(--txt3); font-size:.8rem; }
 
+    /* ─── NOTE ARTICLE CARD ─────────────────────────────────── */
+    .note-card {
+      display:flex; align-items:center; gap:1.25rem;
+      background:var(--card); border:1px solid var(--border);
+      border-radius:var(--radius); padding:1.5rem 1.75rem;
+      text-decoration:none; color:inherit;
+      transition:border-color .3s, transform .3s, background .3s;
+      max-width:720px;
+    }
+    .note-card:hover {
+      border-color:var(--border-h); transform:translateY(-3px);
+      background:var(--card-h);
+    }
+    .note-icon { flex-shrink:0; width:44px; height:44px; }
+    .note-icon img { width:100%; height:100%; object-fit:contain; border-radius:8px; }
+    .note-body { flex:1; min-width:0; }
+    .note-platform {
+      font-size:.73rem; font-weight:700; color:#ffffff;
+      text-transform:uppercase; letter-spacing:.15em; margin-bottom:.35rem;
+    }
+    .note-title {
+      font-size:1rem; font-weight:700; line-height:1.5;
+      color:var(--txt); margin-bottom:.4rem;
+    }
+    .note-meta { font-size:.78rem; color:var(--txt3); }
+    .note-arrow { color:var(--txt3); flex-shrink:0; transition:color .2s, transform .2s; }
+    .note-card:hover .note-arrow { color:var(--blue); transform:translate(3px,-3px); }
+
+    /* ─── PLAYER INTERVIEWS ──────────────────────────────────── */
+    .interview-grid {
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:1.5rem;
+    }
+    .iv-card {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:var(--radius); overflow:hidden;
+      transition:border-color .3s, transform .3s;
+    }
+    .iv-card:hover { border-color:var(--border-h); transform:translateY(-4px); }
+    .iv-video-wrap {
+      position:relative; width:100%;
+      aspect-ratio:9/16;
+      background:#000; overflow:hidden;
+    }
+    .iv-video-wrap video {
+      width:100%; height:100%;
+      object-fit:cover; display:block;
+    }
+    .iv-body { padding:1rem 1.1rem 1.2rem; }
+    .iv-num {
+      font-size:.76rem; font-weight:700; color:var(--blue);
+      text-transform:uppercase; letter-spacing:.12em; margin-bottom:.35rem;
+    }
+    .iv-desc { font-size:.82rem; line-height:1.8; margin:0; }
+    .iv-desc .tag {
+      display:inline-block; margin:0 .25rem .25rem 0;
+      color:var(--blue); font-weight:600;
+    }
+    @media (max-width:900px) {
+      .interview-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width:540px) {
+      .interview-grid { grid-template-columns: 1fr; }
+    }
+
     /* ─── PREVIOUS SESSIONS PHOTO GRID ──────────────────────── */
     .prev-grid {
       display:grid;
@@ -545,7 +624,7 @@
 ═══════════════════════════════════════════════════════════════ -->
 <nav>
   <div class="nav-brand" onclick="go('home')">
-    <img src="TIB images/tib-logo.jpg" alt="TIB Logo">
+    <img src="TIB images/TIB logo.jpg" alt="TIB Logo">
     <span>TIB</span>
   </div>
   <ul class="nav-links" aria-label="Main navigation">
@@ -620,11 +699,14 @@
   <div class="band">
     <section class="section">
       <div class="mission-inner">
-        <div class="label fi">Our Mission</div>
-        <p class="mission-quote fi d1">"Cultural Exchange Through Basketball"</p>
-        <p class="lead fi d2" style="margin:0 auto; text-align:center">
-          The management members who all have experienced sports communication outside of Japan provide you with a great opportunity to make friends and exchange cultures through basketball in Tokyo.
-        </p>
+        <img src="TIB images/TIB logo.jpg" alt="TIB Logo" class="mission-logo fi">
+        <div class="mission-text">
+          <div class="label fi d1">Our Mission</div>
+          <p class="mission-quote fi d1">"Cultural Exchange Through Basketball"</p>
+          <p class="lead fi d2">
+            The management members who all have experienced sports communication outside of Japan provide you with a great opportunity to make friends and exchange cultures through basketball in Tokyo.
+          </p>
+        </div>
       </div>
     </section>
   </div>
@@ -755,6 +837,111 @@
     </section>
   </div>
 
+  <!-- PLAYER INTERVIEWS -->
+  <section class="section">
+    <div class="label">Community Voices</div>
+    <h2 class="h2" style="margin-bottom:.75rem">Players Interview</h2>
+    <p class="lead" style="margin-bottom:2rem">Hear directly from our players about their TIB experience.</p>
+    <div class="interview-grid">
+
+      <div class="iv-card fi">
+        <div class="iv-video-wrap">
+          <video src="TIB images/Interview 1.MP4" poster="TIB images/Interview 1.MP4.png" controls preload="none" playsinline></video>
+        </div>
+        <div class="iv-body">
+          <div class="iv-num">Interview #1</div>
+          <p class="iv-desc">
+            <span class="tag">#Half-Japanese</span>
+            <span class="tag">#Half-American</span>
+            <span class="tag">#University-of-Tokyo</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="iv-card fi d1">
+        <div class="iv-video-wrap">
+          <video src="TIB images/Interview 2.MP4" poster="TIB images/Interview 2.MP4.png" controls preload="none" playsinline></video>
+        </div>
+        <div class="iv-body">
+          <div class="iv-num">Interview #2</div>
+          <p class="iv-desc">
+            <span class="tag">#Exchange-Student</span>
+            <span class="tag">#Studying-at-Keio</span>
+            <span class="tag">#New-Community</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="iv-card fi d2">
+        <div class="iv-video-wrap">
+          <video src="TIB images/Interview 3.MP4" poster="TIB images/Interview 3.MP4.png" controls preload="none" playsinline></video>
+        </div>
+        <div class="iv-body">
+          <div class="iv-num">Interview #3</div>
+          <p class="iv-desc">
+            <span class="tag">#Japanese</span>
+            <span class="tag">#Working-in-Tokyo</span>
+            <span class="tag">#Non-English-Speaker</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="iv-card fi d3">
+        <div class="iv-video-wrap">
+          <video src="TIB images/Interview 4.MP4" poster="TIB images/Interview 4.MP4.png" controls preload="none" playsinline></video>
+        </div>
+        <div class="iv-body">
+          <div class="iv-num">Interview #4</div>
+          <p class="iv-desc">
+            <span class="tag">#Keio-University</span>
+            <span class="tag">#PEARL-Student</span>
+            <span class="tag">#Local-Global-Bridge</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="iv-card fi">
+        <div class="iv-video-wrap">
+          <video src="TIB images/Interview 5.MP4" poster="TIB images/Interview 5.MP4.png" controls preload="none" playsinline></video>
+        </div>
+        <div class="iv-body">
+          <div class="iv-num">Interview #5</div>
+          <p class="iv-desc">
+            <span class="tag">#From-Germany</span>
+            <span class="tag">#Nippon-Sports-Science</span>
+            <span class="tag">#Inclusive-Community</span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- FEATURED ARTICLE -->
+  <div class="band" style="padding-top:2.5rem; padding-bottom:2.5rem;">
+    <section class="section">
+      <div class="label">Featured Article</div>
+      <h2 class="h2" style="margin-bottom:2rem">Read Our Story</h2>
+      <a class="note-card fi" href="https://note.com/taishin_shibuya/n/n7fedb3e3ca9d" target="_blank" rel="noopener">
+        <div class="note-icon">
+          <img src="TIB images/note.png" alt="note logo">
+        </div>
+        <div class="note-body">
+          <div class="note-platform">note</div>
+          <div class="note-title">【バスケで国際交流の場を】学生団体TIBの設立と運営の記録</div>
+          <div class="note-meta">by Taishin Shibuya &nbsp;·&nbsp; note.com</div>
+        </div>
+        <div class="note-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </div>
+      </a>
+    </section>
+  </div>
+
   <!-- CONTACT -->
   <section class="section">
     <div class="label">Contact</div>
@@ -763,11 +950,7 @@
     <div class="contact-row fi">
       <a class="ccard" href="https://www.instagram.com/tib_basketball" target="_blank" rel="noopener">
         <div class="cicon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.5" cy="6.5" r="1" fill="var(--blue)" stroke="none"/>
-          </svg>
+          <img src="TIB images/Instagram logo.jpeg" alt="Instagram" style="width:28px;height:28px;object-fit:contain;border-radius:6px;">
         </div>
         <div>
           <div class="cinfo-lbl">Instagram</div>
@@ -776,10 +959,7 @@
       </a>
       <a class="ccard" href="mailto:tibtokyointernationalballers@gmail.com">
         <div class="cicon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <polyline points="2,4 12,13 22,4"/>
-          </svg>
+          <img src="TIB images/email logo.webp" alt="Email" style="width:28px;height:28px;object-fit:contain;">
         </div>
         <div>
           <div class="cinfo-lbl">Email</div>
@@ -791,7 +971,7 @@
 
   <footer>
     <div class="footer-brand">
-      <img src="TIB images/tib-logo.jpg" alt="TIB Logo">
+      <img src="TIB images/TIB logo.jpg" alt="TIB Logo">
       <span>Tokyo International Ballers</span>
     </div>
     <div class="footer-links">
@@ -823,7 +1003,7 @@
     <p class="lead" style="margin-bottom:0">Sessions are updated regularly. Check back or follow <strong style="color:var(--blue)">@tib_basketball</strong> on Instagram.</p>
     <div class="sessions-grid">
       <div class="s-card upcoming fi">
-        <div class="s-date">TBA — Check Instagram</div>
+        <div class="s-date">TBD — Check Instagram</div>
         <div class="s-title">Regular Session</div>
         <div class="s-body">Location &amp; time TBA. Registration via Luma link or Instagram DM.</div>
         <div class="s-meta">
@@ -863,8 +1043,8 @@
       <div class="step-card fi">
         <div class="step-num">1</div>
         <h3>Sign Up via Luma</h3>
-        <p>We post an event link on Luma for each session. Click the participation link shared in our Instagram bio or posts to reserve your spot and complete payment.</p>
-        <a href="https://www.instagram.com/tib_basketball" target="_blank" rel="noopener" class="btn btn-primary">Find Link on Instagram</a>
+        <p>We post an event link on Luma for each session. Visit our official Luma page to see upcoming events, reserve your spot, and complete payment.</p>
+        <a href="https://luma.com/user/usr-j74oZC6uFIaZBj6" target="_blank" rel="noopener" class="btn btn-primary">View on Luma</a>
       </div>
       <div class="step-card fi d1">
         <div class="step-num">2</div>
@@ -877,7 +1057,7 @@
 
   <footer>
     <div class="footer-brand">
-      <img src="TIB images/tib-logo.jpg" alt="TIB Logo">
+      <img src="TIB images/TIB logo.jpg" alt="TIB Logo">
       <span>Tokyo International Ballers</span>
     </div>
     <div class="footer-links">
@@ -1018,7 +1198,7 @@
 
   <footer>
     <div class="footer-brand">
-      <img src="TIB images/tib-logo.jpg" alt="TIB Logo">
+      <img src="TIB images/TIB logo.jpg" alt="TIB Logo">
       <span>Tokyo International Ballers</span>
     </div>
     <div class="footer-links">
@@ -1131,7 +1311,7 @@
 
   <footer>
     <div class="footer-brand">
-      <img src="TIB images/tib-logo.jpg" alt="TIB Logo">
+      <img src="TIB images/TIB logo.jpg" alt="TIB Logo">
       <span>Tokyo International Ballers</span>
     </div>
     <div class="footer-links">
@@ -1285,3 +1465,4 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
